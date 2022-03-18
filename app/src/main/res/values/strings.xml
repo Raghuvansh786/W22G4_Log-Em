@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Log-Em</string>
+    <string name="txtTitle">Login</string>
+    <string name="txtTitleDesc">Please Sign in to continue</string>
+    <string name="editTxtEmailHint">Email</string>
+    <string name="editTxtPasswordHint">Password</string>
+    <string name="btnLogIn">LogIn</string>
+    <string name="txtViewSignUp">Don\'t have an account?</string>
+    <string name="btnMockSignUp">Sign up</string>
 </resources>
