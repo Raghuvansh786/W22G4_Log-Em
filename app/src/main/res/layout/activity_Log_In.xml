@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     android:background="@drawable/Background"
     android:backgroundTintMode="src_in"
-    tools:context=".MainActivity">
+    tools:context=".LogInActivity">
 
     <TextView
-        android:id="@+id/txtViewTitle"
+        android:id="@+id/txtViewCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.328"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewCreateAccount" />
 
     <EditText
         android:id="@+id/editTxtEmail"
@@ -90,7 +90,7 @@
         app:layout_constraintVertical_bias="0.417" />
 
     <Button
-        android:id="@+id/btnLogIn"
+        android:id="@+id/btnSingUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
@@ -106,7 +106,7 @@
         app:layout_constraintVertical_bias="0.237" />
 
     <TextView
-        android:id="@+id/txtViewSignUp"
+        android:id="@+id/txtViewLogIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -120,13 +120,13 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <Button
-        android:id="@+id/btnMockSignUp"
+        android:id="@+id/btnMockLogIn"
         android:layout_width="75dp"
         android:layout_height="32dp"
         android:layout_marginBottom="12dp"
         android:background="?android:attr/selectableItemBackground"
         android:fontFamily="sans-serif"
-        android:gravity="top|left"
+        android:gravity="top|start"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
         android:paddingRight="0dp"
@@ -139,7 +139,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.68"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogIn"
+        app:layout_constraintTop_toBottomOf="@+id/btnSingUp"
         app:layout_constraintVertical_bias="1.0"
         tools:ignore="TouchTargetSizeCheck" />
 
