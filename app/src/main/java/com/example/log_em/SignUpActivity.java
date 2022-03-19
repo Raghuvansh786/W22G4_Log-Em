@@ -23,7 +23,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText editTextFullName, editTextEmail, editTextPassword;
     Button btnSignUp, btnMockSignIn;
     FirebaseAuth fAuth;
-
+    ProgressBar progressBar;
 
     ActivitySignUpBinding binding;
 
@@ -31,84 +31,92 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
-//        View layout = binding.getRoot();
-        setContentView(R.layout.activity_sign_up);
+        View layout = binding.getRoot();
+//        setContentView(R.layout.activity_sign_up);
+        setContentView(layout);
 
-//        editTextFullName = binding.editTxtFullName;
-        editTextFullName = findViewById(R.id.editTxtFullName);
-        editTextEmail = binding.editTxtEmail;
+        try {
+        editTextFullName = binding.editTxtFullName;
+        btnSignUp=  findViewById(R.id.btnSignUp);
         editTextPassword = binding.editTxtPassword;
+          editTextEmail = binding.editTxtEmail;
         fAuth = FirebaseAuth.getInstance();
-        ProgressBar progressBar = binding.progressBar;
+         progressBar = binding.progressBar;
         btnSignUp = binding.btnSignUp;
         btnMockSignIn = binding.btnMockLogIn;
-        String fullName = editTextFullName.getText().toString();
-        String email = editTextEmail.getText().toString();
-        String password = editTextPassword.getText().toString();
-        Log.d("fullName", fullName);
-
         if (fAuth.getCurrentUser() != null) {
             //Send the user to the next activity.
-            startActivity(new Intent(this, LandingPage.class));
+            startActivity(new Intent(SignUpActivity.this, LandingPage.class));
         }
-        try {
 
-//    btnSignUp.setOnClickListener(
-//            (View view) -> {
-//                Log.d("button", "Button is clicked");
-//                Log.d("fullName", fullName);
-//                if (!fullName.isEmpty()) {
-//                    Log.d("fullName", "Full Name is checked");
-//                    if (!email.isEmpty()) {
-//                        Log.d("email", "Email is checked");
-//                        if (!password.isEmpty()) {
-//                            Log.d("password", "password is checked");
-//                            if (password.length() < 6) {
-//                                Toast.makeText(this, "Please Enter a password greater than 6 characters.",
-//                                        Toast.LENGTH_SHORT).show();
-//                            } else {
-//                                progressBar.setVisibility(view.VISIBLE);
-//
-//                                fAuth.createUserWithEmailAndPassword(email, password).
-//                                        addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                                            @Override
-//                                            public void onComplete(@NonNull Task<AuthResult> task) {
-//                                                if (task.isSuccessful()) {
-//                                                    Toast.makeText(SignUpActivity.this, "User Created..",
-//                                                            Toast.LENGTH_SHORT).show();
-//                                                    startActivity(new Intent(SignUpActivity.this, LandingPage.class));
-//                                                } else {
-//                                                    Toast.makeText(SignUpActivity.this, "Error Occured." +
-//                                                            task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                                                }
-//                                            }
-//                                        });
-//                            }
-//
-//
-//                        } else {
-//                            Toast.makeText(this, "Please Enter a valid password.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    } else {
-//                        Toast.makeText(this, "Please enter a valid email.", Toast.LENGTH_SHORT).show();
-//                    }
-//                } else {
-//                    Toast.makeText(this, "Please Enter full Name.", Toast.LENGTH_SHORT).show();
-//                }
-//
-//
-//            });
+            btnSignUp.setOnClickListener(
+            (View view) -> {
+                String fullName = editTextFullName.getText().toString();
+                String email = editTextEmail.getText().toString();
+                String password = editTextPassword.getText().toString();
+                Log.d("button", "Button is clicked");
+                Log.d("fullName", fullName );
+                Log.d("email", email);
+                if (!fullName.isEmpty()) {
+                    Log.d("fullName", "Full Name is checked");
+                    if (!email.isEmpty()) {
+                        Log.d("email", "Email is checked");
+                        if (!password.isEmpty()) {
+                            Log.d("password", "password is checked");
+                            if (password.length() < 6) {
+                                Toast.makeText(this, "Please Enter a password greater than 6 characters.",
+                                        Toast.LENGTH_SHORT).show();
+                            } else {
+                                progressBar.setVisibility(view.VISIBLE);
+
+                                fAuth.createUserWithEmailAndPassword(email, password).
+                                        addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(SignUpActivity.this, "User Created..",
+                                                            Toast.LENGTH_SHORT).show();
+                                                    startActivity(new Intent(SignUpActivity.this, LandingPage.class));
+                                                } else {
+                                                    Toast.makeText(SignUpActivity.this, "Error Occured." +
+                                                            task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                            }
+
+
+                        } else {
+                            Toast.makeText(this, "Please Enter a valid password.", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(this, "Please enter a valid email.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "Please Enter full Name.", Toast.LENGTH_SHORT).show();
+                }
+
+
+            });
+
+
+            btnMockSignIn.setOnClickListener(
+                    (View view) -> {
+                        Log.d("Btn", "Log In clicked");
+                        startActivity(new Intent(SignUpActivity.this, LogInActivity.class));
+                    });
 
         } catch (Exception e) {
             e.printStackTrace();
-            e.getMessage();
+            Log.d("error",e.getMessage());
         }
 
-        btnMockSignIn.setOnClickListener(
-                (View view) -> {
-        Log.d("Btn", "Log In clicked");
-                    startActivity(new Intent(SignUpActivity.this, LogInActivity.class));
-                });
 
     }
 }
+
+
+
+
+
+
