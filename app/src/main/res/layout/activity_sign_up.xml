@@ -93,6 +93,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTxtEmail" />
 
+    <RadioButton
+        android:id="@+id/rdbtnisAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/rdBtnAdminTxt"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTxtPassword"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/edtTxtAdminCode"
+        android:layout_width="130dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/white"
+        android:backgroundTintMode="src_in"
+        android:ems="10"
+        android:foregroundTint="@color/white"
+        android:foregroundTintMode="add"
+        android:hint="@string/editTxtAdminCode"
+        android:inputType="text"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:singleLine="false"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/btnSignUp"
+        app:layout_constraintHorizontal_bias="0.608"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rdbtnisAdmin" />
+
     <Button
         android:id="@+id/btnSignUp"
         android:layout_width="wrap_content"
@@ -129,6 +168,10 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:foregroundTint="@color/white"
+        android:isScrollContainer="false"
+        android:progressTint="@color/white"
+        android:secondaryProgressTint="@color/purple_500"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/txtViewLogIn"
         app:layout_constraintEnd_toEndOf="parent"

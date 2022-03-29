@@ -10,5 +10,8 @@
     <string name="txtViewCA">Create Account</string>
     <string name="editTxtFullNameHint">Full Name</string>
     <string name="txtViewLogIn">Already have an account?</string>
+    <string name="rdBtnIsAdminTxt">Admin</string>
     <string name="btnMockLogIn">Log in</string>
+    <string name="editTxtAdminCode">4 Digit Code</string>
+    <string name="rdBtnAdminTxt">Admin</string>
 </resources>
