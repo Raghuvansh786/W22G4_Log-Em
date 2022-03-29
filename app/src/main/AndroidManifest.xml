@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LogEm">
         <activity
+            android:name=".AdminLanding"
+            android:exported="false" />
+        <activity
             android:name=".LandingPage"
             android:exported="false" />
         <activity

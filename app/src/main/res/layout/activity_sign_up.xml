@@ -93,25 +93,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTxtEmail" />
 
-    <RadioButton
-        android:id="@+id/rdbtnisAdmin"
-        android:layout_width="wrap_content"
+    <CheckBox
+        android:id="@+id/chkBoxIsAdmin"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/rdBtnAdminTxt"
+        android:text="@string/rdBtnIsAdminTxt"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/edtTxtAdminCode"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTxtPassword"
-        tools:ignore="TextContrastCheck" />
+        app:layout_constraintVertical_bias="0.411" />
 
     <EditText
         android:id="@+id/edtTxtAdminCode"
         android:layout_width="130dp"
         android:layout_height="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="120dp"
         android:autofillHints=""
         android:backgroundTint="@color/white"
         android:backgroundTintMode="src_in"
@@ -127,10 +127,10 @@
         android:textColorHint="@color/white"
         android:textSize="12sp"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnSignUp"
         app:layout_constraintHorizontal_bias="0.608"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rdbtnisAdmin" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnSignUp"

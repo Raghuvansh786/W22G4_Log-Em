@@ -14,4 +14,5 @@
     <string name="btnMockLogIn">Log in</string>
     <string name="editTxtAdminCode">4 Digit Code</string>
     <string name="rdBtnAdminTxt">Admin</string>
+    <string name="txtViewDesc">This is Admin landing page. Only admin have access to this page</string>
 </resources>

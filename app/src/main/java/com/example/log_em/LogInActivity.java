@@ -12,14 +12,20 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.log_em.databinding.ActivityLogInBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LogInActivity extends AppCompatActivity {
     Button btnMockSignUp, btnLogIn;
     EditText editTextEmail, editTextPassword;
     FirebaseAuth fAuth;
+
+    FirebaseFirestore fStrore;
     ActivityLogInBinding binding;
 
     @Override
@@ -34,6 +40,8 @@ public class LogInActivity extends AppCompatActivity {
         editTextPassword = binding.editTxtPassword;
         btnLogIn = binding.btnLogIn;
         fAuth = FirebaseAuth.getInstance();
+        fStrore = FirebaseFirestore.getInstance();
+
 
 //        if (fAuth.getCurrentUser() != null) {
 //            //Send the user to the next activity.
@@ -42,47 +50,68 @@ public class LogInActivity extends AppCompatActivity {
 
 
         btnLogIn.setOnClickListener(
-                (View view) ->{
+                (View view) -> {
                     String email = editTextEmail.getText().toString();
                     String password = editTextPassword.getText().toString().trim();
                     Log.d("Email", email);
                     Log.d("pass", password);
 
-                    if(!email.isEmpty()){
-                        if(!password.isEmpty()){
-                            if(password.length() < 6) {
+                    if (!email.isEmpty()) {
+                        if (!password.isEmpty()) {
+                            if (password.length() < 6) {
                                 Toast.makeText(this, "Password should be greater than 6 characters", Toast.LENGTH_SHORT).show();
-                            }else {
-                                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(
-                                        (@NonNull Task<AuthResult> task) ->{
-                                            if(task.isSuccessful()){
-                                                startActivity(new Intent(LogInActivity.this,LandingPage.class));
+                            } else {
+                                fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
+                                        (@NonNull Task<AuthResult> task) -> {
+                                            if (task.isSuccessful()) {
+                                                Log.d("TAG", "In the sign in method");
+
+                                                checkUserAccess(fAuth.getCurrentUser().getUid());
+                                                Log.d("TAG", ""+fAuth.getCurrentUser());
+//                                                startActivity(new Intent(LogInActivity.this,LandingPage.class));
                                                 Toast.makeText(LogInActivity.this, "Logged In Successfully..", Toast.LENGTH_SHORT).show();
                                                 finish();
-                                            }else {
+                                            } else {
+                                                Log.d("Error", task.getException().getMessage());
                                                 Toast.makeText(LogInActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                             }
 
-                                });
+                                        });
                             }
-                        }else {
+                        } else {
                             Toast.makeText(this, "Please enter a password.", Toast.LENGTH_SHORT).show();
                         }
 
-                    }else {
+                    } else {
                         Toast.makeText(this, "Please Enter email address.", Toast.LENGTH_SHORT).show();
                     }
 
 
-
-        });
-
-
+                });
 
 
         btnMockSignUp.setOnClickListener(
                 (View view) -> {
                     startActivity(new Intent(this, SignUpActivity.class));
                 });
+    }
+
+    private void checkUserAccess(String uid) {
+        DocumentReference df = fStrore.collection("Users").document(uid);
+        df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Log.d("TAG", "" + documentSnapshot.getData());
+
+                if (documentSnapshot.getString("isAdmin") != null) {
+                    // Redirect to the admin activity
+                    startActivity(new Intent(LogInActivity.this, AdminLanding.class));
+                }
+
+                if (documentSnapshot.getString("isUser") != null) {
+                    startActivity(new Intent(LogInActivity.this, LandingPage.class));
+                }
+            }
+        });
     }
 }

@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -28,8 +30,8 @@ import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
     EditText editTextFullName, editTextEmail, editTextPassword, editTextAdminCode;
+    CheckBox chkBoxIsAdmin;
     Button btnSignUp, btnMockSignIn;
-    RadioButton rdBtnIsAdmin;
     FirebaseAuth fAuth;
     ProgressBar progressBar;
     FirebaseFirestore fStore;
@@ -48,8 +50,8 @@ public class SignUpActivity extends AppCompatActivity {
             editTextFullName = binding.editTxtFullName;
             btnSignUp = findViewById(R.id.btnSignUp);
             editTextPassword = binding.editTxtPassword;
-            rdBtnIsAdmin = binding.rdbtnisAdmin;
             editTextEmail = binding.editTxtEmail;
+            chkBoxIsAdmin = binding.chkBoxIsAdmin;
             editTextAdminCode = binding.edtTxtAdminCode;
             fAuth = FirebaseAuth.getInstance();
             fStore = FirebaseFirestore.getInstance();
@@ -62,10 +64,18 @@ public class SignUpActivity extends AppCompatActivity {
             }
 
             Log.d("TAG", "Admin is not checked yet.");
-            if (!rdBtnIsAdmin.isChecked()) {
-                Log.d("TAG", "Admin is Clicked.");
-                editTextAdminCode.setVisibility(View.VISIBLE);
-            }
+
+            chkBoxIsAdmin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (compoundButton.isChecked()) {
+                        Log.d("TAG", "Admin is Clicked.");
+                        editTextAdminCode.setVisibility(View.VISIBLE);
+                    } else {
+                        editTextAdminCode.setVisibility(View.INVISIBLE);
+                    }
+                }
+            });
 
 
             btnSignUp.setOnClickListener(
@@ -90,39 +100,43 @@ public class SignUpActivity extends AppCompatActivity {
                                                 Toast.LENGTH_SHORT).show();
                                     } else {
                                         progressBar.setVisibility(View.VISIBLE);
+                                        fAuth.createUserWithEmailAndPassword(email, password).
+                                                addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                        if (AdminCode.length() == 4 && AdminCode.equalsIgnoreCase("1111")) {
+                                                        if (task.isSuccessful()) {
+                                                            String user = fAuth.getCurrentUser().getUid();
+                                                            DocumentReference df = fStore.collection("Users").document(user);
 
-                                            fAuth.createUserWithEmailAndPassword(email, password).
-                                                    addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                                            Map<String, Object> userInfo = new HashMap<>();
 
-                                                            if (task.isSuccessful()) {
-                                                                FirebaseUser user = fAuth.getCurrentUser();
-                                                                DocumentReference df = fStore.collection("Users").document(fullName);
-
-                                                                Map<String, Object> userInfo = new HashMap<>();
-
-                                                                userInfo.put("fullName", fullName);
-                                                                userInfo.put("email", email);
-                                                                userInfo.put("isAdmin","1");
-                                                                df.set(userInfo);
-                                                                Toast.makeText(SignUpActivity.this, "User Created..",
-                                                                        Toast.LENGTH_SHORT).show();
-                                                                startActivity(new Intent(SignUpActivity.this, LandingPage.class));
-                                                                finish();
+                                                            userInfo.put("fullName", fullName);
+                                                            userInfo.put("email", email);
+                                                            if (AdminCode.length() == 4 && AdminCode.equalsIgnoreCase("1111")) {
+                                                                userInfo.put("isAdmin", "1");
                                                             } else {
-                                                                Toast.makeText(SignUpActivity.this, "Error Occurred." +
-                                                                        task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                                userInfo.put("isUser", "1");
                                                             }
+                                                            df.set(userInfo);
+                                                            Toast.makeText(SignUpActivity.this, "User Created..",
+                                                                    Toast.LENGTH_SHORT).show();
+                                                            startActivity(new Intent(SignUpActivity.this, LogInActivity.class));
+                                                            finish();
+                                                        } else {
+                                                            Toast.makeText(SignUpActivity.this, "Error Occurred." +
+                                                                    task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                                         }
-                                                    });
-
-                                        } else {
-
-                                            Toast.makeText(this, "Admin code is Exactly 4 digits. Please enter again.", Toast.LENGTH_SHORT).show();
-                                        }
+                                                    }
+                                                });
+//
+//                                        if (AdminCode.length() == 4 && AdminCode.equalsIgnoreCase("1111")) {
+//
+//
+//                                        } else {
+//
+//                                            Toast.makeText(this, "Admin code is Exactly 4 digits. Please enter again.", Toast.LENGTH_SHORT).show();
+//                                        }
 
                                     }
 
