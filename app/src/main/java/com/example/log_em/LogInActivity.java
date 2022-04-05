@@ -101,7 +101,7 @@ public class LogInActivity extends AppCompatActivity {
         df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Log.d("TAG", "" + documentSnapshot.getData());
+//                Log.d("TAG", "" + documentSnapshot.getData());
 
                 if (documentSnapshot.getString("isAdmin") != null) {
                     // Redirect to the admin activity

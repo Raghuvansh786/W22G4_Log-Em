@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "738249831874",
+    "project_id": "log-em",
+    "storage_bucket": "log-em.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738249831874:android:638d907e0afe5a3063525b",
+        "android_client_info": {
+          "package_name": "com.example.log_em"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738249831874-24kgm1f0qtmrug4mgtd1nqi9sm245ju4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3kveMk6Uum9lidxVVsqEcLgOK6t5DKZI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738249831874-24kgm1f0qtmrug4mgtd1nqi9sm245ju4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
