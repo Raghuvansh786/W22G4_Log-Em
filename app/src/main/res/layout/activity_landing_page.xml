@@ -44,10 +44,9 @@
         <ImageView
             android:id="@+id/imgViewPrev"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.2"
-            android:alpha="0.4"
-            app:srcCompat="@drawable/backarrow" />
+            app:srcCompat="@drawable/previous" />
 
         <TextView
             android:id="@+id/txtViewMonth"
@@ -55,15 +54,15 @@
             android:layout_height="match_parent"
             android:layout_weight="0.6"
             android:gravity="center_horizontal|center_vertical"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/imgViewNext"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"
-            android:alpha="0.4"
-            app:srcCompat="@drawable/next2" />
+            app:srcCompat="@drawable/forward" />
     </LinearLayout>
 
     <com.github.sundeepk.compactcalendarview.CompactCalendarView
@@ -79,7 +78,7 @@
         app:compactCalendarMultiEventIndicatorColor="#fff"
         app:compactCalendarTargetHeight="250dp"
         app:compactCalendarTextColor="#fff"
-        app:compactCalendarTextSize="12sp"
+        app:compactCalendarTextSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

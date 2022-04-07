@@ -25,7 +25,7 @@ public class LogInActivity extends AppCompatActivity {
     EditText editTextEmail, editTextPassword;
     FirebaseAuth fAuth;
 
-    FirebaseFirestore fStrore;
+    FirebaseFirestore fStore;
     ActivityLogInBinding binding;
 
     @Override
@@ -40,7 +40,9 @@ public class LogInActivity extends AppCompatActivity {
         editTextPassword = binding.editTxtPassword;
         btnLogIn = binding.btnLogIn;
         fAuth = FirebaseAuth.getInstance();
-        fStrore = FirebaseFirestore.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+
+
 
 
 //        if (fAuth.getCurrentUser() != null) {
@@ -97,7 +99,7 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void checkUserAccess(String uid) {
-        DocumentReference df = fStrore.collection("Users").document(uid);
+        DocumentReference df = fStore.collection("Users").document(uid);
         df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
