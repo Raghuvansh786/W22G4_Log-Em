@@ -1,11 +1,11 @@
 package com.example.log_em;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import java.util.List;
 
 
@@ -20,7 +20,7 @@ public class EmployeeAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        Log.d(TAG, "getCount: Size of empName List" + empName.size());
+//        Log.d(TAG, "getCount: Size of empName List" + empName.size());
         return empName.size();
     }
 
@@ -44,7 +44,7 @@ public class EmployeeAdapter extends BaseAdapter {
         TextView txtViewName, txtViewEmail;
 
         txtViewEmail = view.findViewById(R.id.txtViewEmail);
-        txtViewName = view.findViewById(R.id.txtViewName);
+        txtViewName = view.findViewById(R.id.txtViewEmpName);
 
         txtViewName.setText(empName.get(i));
         txtViewEmail.setText(empEmail.get(i));

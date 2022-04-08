@@ -1,43 +1,33 @@
 package com.example.log_em;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.log_em.databinding.ActivityLandingPageBinding;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
 public class LandingPage extends AppCompatActivity {
-
+    String Date = "04/09/2022";
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     TextView txtViewMonth;
@@ -60,7 +50,7 @@ public class LandingPage extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
         btnLogOut = binding.btnLogOut;
         compactCalendar = binding.compactCalendarSchedule;
-        txtViewMonth =binding.txtViewMonth;
+        txtViewMonth = binding.txtViewMonth;
         imgViewBack = binding.imgViewPrev;
         imgViewNext = binding.imgViewNext;
         txtViewMonth.setText(dateFormatForMonth.format(compactCalendar.getFirstDayOfCurrentMonth()));
@@ -91,53 +81,66 @@ public class LandingPage extends AppCompatActivity {
 
                     for (int i = 0; i < schedule.size(); i++) {
 
-                        String[] parts = schedule.get(i).split("/");
+                        if (schedule.get(i).equalsIgnoreCase(Date)){
+                            Log.d(TAG, "onCreate: The following date matched with the given date" + schedule.get(i));
+                    }else{
+                        Log.d(TAG, "onCreate: No dates matched..");
+                    }
 
-                        int month = Integer.parseInt(parts[0]);
-                        int day = Integer.parseInt(parts[1]);
-                        int year = Integer.parseInt(parts[2]);
+                    String[] parts = schedule.get(i).split("/");
 
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.set(Calendar.YEAR, year);
-                        calendar.set(Calendar.MONTH, (month-1));
-                        calendar.set(Calendar.DAY_OF_MONTH, day);
+                    int month = Integer.parseInt(parts[0]);
+                    int day = Integer.parseInt(parts[1]);
+                    int year = Integer.parseInt(parts[2]);
 
-                        long milliTime = calendar.getTimeInMillis();
-                        Log.d(TAG, "onCreate: " + milliTime);
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.set(Calendar.YEAR, year);
+                    calendar.set(Calendar.MONTH, (month - 1));
+                    calendar.set(Calendar.DAY_OF_MONTH, day);
 
-                        Event ev1 = new Event(Color.GREEN,milliTime);
-                        compactCalendar.addEvent(ev1);
+                    long milliTime = calendar.getTimeInMillis();
+                    Log.d(TAG, "onCreate: " + milliTime);
+
+                    Event ev1 = new Event(Color.GREEN, milliTime);
+                    compactCalendar.addEvent(ev1);
 //                        String x = String.valueOf(calendarViewSchedule.getDate());
 
 //                        Log.d(TAG, "onCreate: Current date from calendar view " + x);
 
-                    }
-                });
+                }
+    });
 
-        imgViewNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                compactCalendar.scrollRight();
-                txtViewMonth.setText(dateFormatForMonth.format(compactCalendar.getFirstDayOfCurrentMonth()));
-            }
-        });
+        imgViewNext.setOnClickListener(new View.OnClickListener()
 
-        imgViewBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                compactCalendar.scrollLeft();
-                txtViewMonth.setText(dateFormatForMonth.format(compactCalendar.getFirstDayOfCurrentMonth()));
-            }
-        });
-
-        btnLogOut.setOnClickListener((View view) -> {
-
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(this, LogInActivity.class));
-            finish();
-
-        });
+    {
+        @Override
+        public void onClick (View view){
+        compactCalendar.scrollRight();
+        txtViewMonth.setText(dateFormatForMonth.format(compactCalendar.getFirstDayOfCurrentMonth()));
     }
+    });
+
+        imgViewBack.setOnClickListener(new View.OnClickListener()
+
+    {
+        @Override
+        public void onClick (View view){
+        compactCalendar.scrollLeft();
+        txtViewMonth.setText(dateFormatForMonth.format(compactCalendar.getFirstDayOfCurrentMonth()));
+    }
+    });
+
+        btnLogOut.setOnClickListener((
+    View view)->
+
+    {
+
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(this, LogInActivity.class));
+        finish();
+
+    });
+}
 
     private void getSchedule(String uid) {
 

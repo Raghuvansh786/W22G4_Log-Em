@@ -9,8 +9,6 @@ import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.log_em.databinding.FragmentEmployeesBinding;
-
 import java.util.List;
 
 public class fragmentEmployees extends Fragment {
@@ -18,36 +16,23 @@ public class fragmentEmployees extends Fragment {
     private static final String TAG = "fragmentEmployees";
     List<String> empName;
     List<String> empEmail;
-    FragmentEmployeesBinding binding;
+    View view;
 
     public fragmentEmployees(List<String> empName, List<String> empEmail) {
         this.empName = empName;
         this.empEmail = empEmail;
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentEmployeesBinding.inflate(inflater,container,false);
-        View view = binding.getRoot();
-//        lstViewEmployee = binding.lstViewEmployees;
-        Log.d(TAG, "onCreateView: Size of empName list is" + empName.size());
-//        EmployeeAdapter employeeAdapter = new EmployeeAdapter(empName,empEmail);
-//        lstViewEmployee.setAdapter(employeeAdapter);
-//        return  view;
+        view = inflater.inflate(R.layout.fragment_employees, container, false);
+        EmployeeAdapter employeeAdapter = new EmployeeAdapter(empName, empEmail);
 
-        try {
-            return inflater.inflate(R.layout.fragment_employees, container, false);
-            // ... rest of body of onCreateView() ...
-        } catch (Exception e) {
-            Log.e(TAG, "onCreateView", e);
-            throw e;
-        }
-//        return inflater.inflate(R.layout.fragment_employees, container, false);
-
+        lstViewEmployee = view.findViewById(R.id.lstViewEmployees);
+        lstViewEmployee.setAdapter(employeeAdapter);
+        Log.d(TAG, "onCreateView: List View Size " + lstViewEmployee.getCount());
+        return view;
 
     }
 }

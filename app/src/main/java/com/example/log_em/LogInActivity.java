@@ -1,8 +1,5 @@
 package com.example.log_em;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.log_em.databinding.ActivityLogInBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -111,7 +111,7 @@ public class LogInActivity extends AppCompatActivity {
                 }
 
                 if (documentSnapshot.getString("isUser") != null) {
-                    startActivity(new Intent(LogInActivity.this, LandingPage.class));
+                    startActivity(new Intent(LogInActivity.this, EmpLanding.class));
                 }
             }
         });

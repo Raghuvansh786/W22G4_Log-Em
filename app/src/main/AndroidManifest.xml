@@ -12,17 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LogEm">
         <activity
-            android:name=".sample.sampleFragment"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".EmpLanding"
+            android:exported="false" />
+        <activity
+            android:name=".updateAvailability"
+            android:exported="false" />
+        <activity
+            android:name=".timeOff"
+            android:exported="false" />
         <activity
             android:name=".AdminLanding"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".LandingPage"
             android:exported="false" />
@@ -31,8 +31,12 @@
             android:exported="false" />
         <activity
             android:name=".LogInActivity"
-            android:exported="false">
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
