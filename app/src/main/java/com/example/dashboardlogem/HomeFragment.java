@@ -15,6 +15,8 @@ public class HomeFragment extends Fragment {
 
     TextView txtViewName;
     TextView txtViewEmpNum;
+    TextView txtViewShiftTime;
+
     View view;
     HomeViewModel homeVM;
     @Override
@@ -26,14 +28,21 @@ public class HomeFragment extends Fragment {
 
 
         homeVM = new ViewModelProvider(this).get(HomeViewModel.class);
-
+        setUser(homeVM);
         view = inflater.inflate(R.layout.fragment_home, container, false);
         txtViewName = view.findViewById(R.id.txtViewName);
-
-        homeVM.generateUsername("Amit Bhattacharya");
-        txtViewName.setText(homeVM.nameOfUser);
         txtViewEmpNum = view.findViewById(R.id.txtViewEmpNum);
-        txtViewEmpNum.setText("12345");
+        txtViewShiftTime = view.findViewById(R.id.txtViewShiftTime);
+
+        txtViewName.setText(homeVM.getNameOfUser());
+        txtViewEmpNum.setText(homeVM.getEmployeeNumber());
+        txtViewShiftTime.setText(homeVM.getShiftTime());
         return view;
+    }
+
+    public void setUser(HomeViewModel hm){
+        hm.setNameOfUser("Alborz Johnson");
+        hm.setEmployeeNumber("0001234");
+        hm.setShiftTime("9:00pm - 10:00am");
     }
 }
