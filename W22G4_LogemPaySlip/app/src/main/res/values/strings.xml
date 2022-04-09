@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">W22G4_Log-em-PaySlip</string>
+    <string name="txtTitle">Payslip Summary</string>
+    <string name="txtHours">Hours Worked:</string>
+</resources>
