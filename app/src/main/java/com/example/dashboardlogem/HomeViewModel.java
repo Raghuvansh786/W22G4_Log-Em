@@ -1,15 +1,26 @@
 package com.example.dashboardlogem;
 
 import android.util.Log;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
+
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.List;
 
 public class HomeViewModel extends ViewModel {
 
     String nameOfUser;
     String employeeNumber;
     String shiftTime;
+
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
 
     public String getNameOfUser() {
         return nameOfUser;
@@ -41,6 +52,9 @@ public class HomeViewModel extends ViewModel {
         this.shiftTime = shiftTime;
     }
 
+
+
+
     public HomeViewModel() {
         Log.i("ViewModel", "HomeViewModel is created");
         this.nameOfUser="";
@@ -50,5 +64,33 @@ public class HomeViewModel extends ViewModel {
 
     public void generateUsername(String name){
         nameOfUser = name;
+    }
+
+
+    public void setData(){
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+
+        String userID = fAuth.getCurrentUser().getUid();
+        Log.d("logInDebugM", "onCreate: Current User ID:  " + userID);
+
+        DocumentReference df = fStore.collection("Users").document(userID);
+
+
+        df.get().addOnCompleteListener(
+                (@NonNull Task<DocumentSnapshot> task) -> {
+
+                    Log.d("abcd", "onComplete: Reading From the database");
+                    DocumentSnapshot document = task.getResult();
+                    List<String> schedule = (List<String>) document.get("schedule");
+                    setEmployeeNumber(userID);
+                    setNameOfUser(document.get("fullName").toString());
+
+
+                    Log.d("loginDebug", "getData: The Name of the Employee is " + getNameOfUser());
+                    Log.d("loginDebug", "getData: The emp Num is " + getEmployeeNumber());
+                });
+
+        Log.d("anfr",getNameOfUser());
     }
 }

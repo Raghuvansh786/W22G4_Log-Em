@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_earnings_24.xml" value="0.129" />
+        <entry key="app/src/main/res/layout/activity_log_em_login.xml" value="0.16869300911854104" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_clock_in.xml" value="0.16869300911854104" />
         <entry key="app/src/main/res/layout/fragment_earnings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.16869300911854104" />
