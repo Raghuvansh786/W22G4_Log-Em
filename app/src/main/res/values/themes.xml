@@ -26,4 +26,10 @@
     <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
         <item name="android:textColorPrimary">@color/white</item>
     </style>
+    <style name="Theme.LogEm.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.LogEm.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.LogEm.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

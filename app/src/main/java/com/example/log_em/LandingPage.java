@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class LandingPage extends AppCompatActivity {
-    String Date = "04/09/2022";
+    String Date = "04/08/2022";
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     TextView txtViewMonth;
@@ -111,7 +111,6 @@ public class LandingPage extends AppCompatActivity {
                             Event ev1 = new Event(Color.GREEN, milliTime);
                             compactCalendar.addEvent(ev1);
 //                        String x = String.valueOf(calendarViewSchedule.getDate());
-
 //                        Log.d(TAG, "onCreate: Current date from calendar view " + x);
 
                         }

@@ -75,7 +75,7 @@ public class AdminLanding extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                getData();
-                EmployeeAdapter employeeAdapter = new EmployeeAdapter(empNames,proviene);
+                EmployeeAdapter employeeAdapter = new EmployeeAdapter(empNames,empEmail);
                 employeeAdapter.notifyDataSetChanged();
                 lstViewEmployee.setAdapter(employeeAdapter);
             }
