@@ -17,10 +17,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class timeOff extends AppCompatActivity {
@@ -30,7 +28,6 @@ ActivityTimeOffBinding binding;
     String eName, eEmail, date;
     CalendarView calendar;
     Button btnCancel,btnConfirm;
-    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
 
     private static final String TAG = "timeOff";
     @Override
@@ -88,6 +85,13 @@ ActivityTimeOffBinding binding;
         });
 
 
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(timeOff.this, EmpLanding.class));
+                finish();
+            }
+        });
     }
 
 

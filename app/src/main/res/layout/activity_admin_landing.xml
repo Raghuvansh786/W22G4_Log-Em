@@ -34,18 +34,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnAllEmps"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:text="Show All Employees"
-        android:textColor="@color/black"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutButtons"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.58" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <Button
+            android:id="@+id/btnAddSchedule"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:text="Add Schedule"
+            android:textColor="@color/black"
+            android:textSize="9sp" />
+
+        <Button
+            android:id="@+id/btnAllEmps"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:text="All Employee"
+            android:textColor="@color/black"
+            android:textSize="9sp" />
+
+        <Button
+            android:id="@+id/btnVtoRequest"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:text="Time Off Request"
+            android:textColor="@color/black"
+            android:textSize="9sp" />
+
+        <Button
+            android:id="@+id/btnAvailablity"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:text="Available request"
+            android:textColor="@color/black"
+            android:textSize="9sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayoutButtons"
@@ -121,18 +159,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutButtons2" />
-
-    <Button
-        android:id="@+id/btnAddSchedule"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1"
-        android:text="Add Schedule"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnAllEmps"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
         android:id="@+id/btnSignOut"

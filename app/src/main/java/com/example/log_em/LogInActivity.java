@@ -94,6 +94,7 @@ public class LogInActivity extends AppCompatActivity {
 
         btnMockSignUp.setOnClickListener(
                 (View view) -> {
+                    fAuth.signOut();
                     startActivity(new Intent(this, SignUpActivity.class));
                 });
     }
@@ -111,9 +112,11 @@ public class LogInActivity extends AppCompatActivity {
                 }
 
                 if (documentSnapshot.getString("isUser") != null) {
+                    Log.d("TAG", "onSuccess: Redirecting to the EmpLanding Activity");
                     startActivity(new Intent(LogInActivity.this, EmpLanding.class));
                 }
             }
         });
     }
+
 }

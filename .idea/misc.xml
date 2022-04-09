@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/previous.xml" value="0.261" />
         <entry key="app/src/main/res/layout/activity_Log_In.xml" value="0.4973958333333333" />
+        <entry key="app/src/main/res/layout/activity_add_emp_schedule.xml" value="0.4973958333333333" />
         <entry key="app/src/main/res/layout/activity_admin2.xml" value="0.23505572441742653" />
         <entry key="app/src/main/res/layout/activity_admin_landing.xml" value="0.397887323943662" />
         <entry key="app/src/main/res/layout/activity_emp_landing.xml" value="0.48333333333333334" />

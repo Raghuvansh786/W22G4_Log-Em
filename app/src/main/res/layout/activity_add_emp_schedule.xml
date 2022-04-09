@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".updateAvailability">
+    tools:context=".AddEmpSchedule">
+
     <TextView
         android:id="@+id/txtViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Welcome to the Update Availability."
+        android:text="Please Add Schedule for Employee"
         android:textSize="20sp"
         android:background="#4599af"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +52,7 @@
 
     <TextView
         android:id="@+id/txtViewSelectedDate"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="35dp"
         android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,4 +85,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toEndOf="@+id/btnCancel" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

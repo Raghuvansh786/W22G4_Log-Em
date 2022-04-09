@@ -18,7 +18,7 @@ public class EmpLanding extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     ActivityEmpLandingBinding binding;
-    Button btnLogOut, btnTimeOff, btnAvailability;
+    Button btnLogOut, btnTimeOff, btnAvailability,btnSchdule;
     private static final String TAG = "EmpLanding";
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
 
@@ -32,9 +32,18 @@ public class EmpLanding extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         btnLogOut = binding.btnSignOut;
+        btnSchdule = binding.btnSchedule;
         btnTimeOff = binding.btnTimeOff;
         btnAvailability = binding.btnAvailability;
 
+
+        btnSchdule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(EmpLanding.this, LandingPage.class));
+                finish();
+            }
+        });
 
         btnLogOut.setOnClickListener(
                 (View view) -> {

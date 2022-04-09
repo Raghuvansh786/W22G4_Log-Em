@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -35,6 +37,7 @@ public class LandingPage extends AppCompatActivity {
     Button btnLogOut;
     ActivityLandingPageBinding binding;
     CompactCalendarView compactCalendar;
+    List<String> schedule = new ArrayList<>();
     private static final String TAG = "Landing";
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
     private SimpleDateFormat dateFormatForMonth = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
@@ -75,127 +78,71 @@ public class LandingPage extends AppCompatActivity {
 
                     Log.d("abcd", "onComplete: Reading From the database");
                     DocumentSnapshot document = task.getResult();
-                    List<String> schedule = (List<String>) document.get("schedule");
-                    Log.d("list", "onComplete: Schedule List " + schedule);
-                    Log.d(TAG, "getSchedule: Schedule List Size: " + schedule.size());
+                    schedule = (List<String>) document.get("schedule");
+//                    Log.d("list", "onComplete: Schedule List " + schedule);
+//                    Log.d(TAG, "getSchedule: Schedule List Size: " + schedule.size());
 
-                    for (int i = 0; i < schedule.size(); i++) {
+                    if(schedule==null) {
+                        Toast.makeText(this, "You have no Schedule Yet.", Toast.LENGTH_SHORT).show();
+                    }else {
 
-                        if (schedule.get(i).equalsIgnoreCase(Date)){
-                            Log.d(TAG, "onCreate: The following date matched with the given date" + schedule.get(i));
-                    }else{
-                        Log.d(TAG, "onCreate: No dates matched..");
-                    }
+                        for (int i = 0; i < schedule.size(); i++) {
 
-                    String[] parts = schedule.get(i).split("/");
+                            if (schedule.get(i).equalsIgnoreCase(Date)) {
+                                Log.d(TAG, "onCreate: The following date matched with the given date" + schedule.get(i));
+                            } else {
+                                Log.d(TAG, "onCreate: No dates matched..");
+                            }
 
-                    int month = Integer.parseInt(parts[0]);
-                    int day = Integer.parseInt(parts[1]);
-                    int year = Integer.parseInt(parts[2]);
+                            String[] parts = schedule.get(i).split("/");
 
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.set(Calendar.YEAR, year);
-                    calendar.set(Calendar.MONTH, (month - 1));
-                    calendar.set(Calendar.DAY_OF_MONTH, day);
+                            int month = Integer.parseInt(parts[0]);
+                            int day = Integer.parseInt(parts[1]);
+                            int year = Integer.parseInt(parts[2]);
 
-                    long milliTime = calendar.getTimeInMillis();
-                    Log.d(TAG, "onCreate: " + milliTime);
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.set(Calendar.YEAR, year);
+                            calendar.set(Calendar.MONTH, (month - 1));
+                            calendar.set(Calendar.DAY_OF_MONTH, day);
 
-                    Event ev1 = new Event(Color.GREEN, milliTime);
-                    compactCalendar.addEvent(ev1);
+                            long milliTime = calendar.getTimeInMillis();
+                            Log.d(TAG, "onCreate: " + milliTime);
+
+                            Event ev1 = new Event(Color.GREEN, milliTime);
+                            compactCalendar.addEvent(ev1);
 //                        String x = String.valueOf(calendarViewSchedule.getDate());
 
 //                        Log.d(TAG, "onCreate: Current date from calendar view " + x);
 
-                }
-    });
-
-        imgViewNext.setOnClickListener(new View.OnClickListener()
-
-    {
-        @Override
-        public void onClick (View view){
-        compactCalendar.scrollRight();
-        txtViewMonth.setText(dateFormatForMonth.format(compactCalendar.getFirstDayOfCurrentMonth()));
-    }
-    });
-
-        imgViewBack.setOnClickListener(new View.OnClickListener()
-
-    {
-        @Override
-        public void onClick (View view){
-        compactCalendar.scrollLeft();
-        txtViewMonth.setText(dateFormatForMonth.format(compactCalendar.getFirstDayOfCurrentMonth()));
-    }
-    });
-
-        btnLogOut.setOnClickListener((
-    View view)->
-
-    {
-
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(this, LogInActivity.class));
-        finish();
-
-    });
-}
-
-    private void getSchedule(String uid) {
-
-        DocumentReference df = fStore.collection("Users").document(uid);
-
-        df.get().addOnCompleteListener(
-                (@NonNull Task<DocumentSnapshot> task) -> {
-
-                    Log.d("abcd", "onComplete: Reading From the database");
-                    DocumentSnapshot document = task.getResult();
-                    List<String> schedule = (List<String>) document.get("schedule");
-                    Log.d("list", "onComplete: Schedule List " + schedule);
-                    Log.d(TAG, "getSchedule: Schedule List Size: " + schedule.size());
-
-                    for (int i = 0; i < schedule.size(); i++) {
-
-                        String[] Date = schedule.get(i).split("/");
-//                    Log.d(TAG, "getSchedule: Size of date array is:" + Date.length);
-                        String month = Date[0];
-                        String date = Date[1];
-                        String Year = Date[2];
-
-                        Log.d(TAG, "getSchedule: Date: "
-                                + date + " Month: " + month + " Year: " + Year);
+                        }
                     }
                 });
-//        Log.d(TAG, "getSchedule: New List size: "+ mSchedule.size());
-////        + "\n" +"List first Element:" + mSchedule.get(1));
-//        return mSchedule;
 
+        imgViewNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                compactCalendar.scrollRight();
+                txtViewMonth.setText(dateFormatForMonth.format(compactCalendar.getFirstDayOfCurrentMonth()));
+            }
+        });
+
+        imgViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                compactCalendar.scrollLeft();
+                txtViewMonth.setText(dateFormatForMonth.format(compactCalendar.getFirstDayOfCurrentMonth()));
+            }
+        });
+
+        btnLogOut.setOnClickListener((
+                View view) ->
+
+        {
+
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(this, LogInActivity.class));
+            finish();
+
+        });
     }
 }
-
-
-//   private  List<String> getSchedule(String uid) {
-//              List<String> mSchedule = new ArrayList<>();
-//        DocumentReference df = fStore.collection("Users").document(userID);
-//
-//        df.get().addOnCompleteListener(
-//                (@NonNull Task<DocumentSnapshot> task) -> {
-//
-//                    Log.d("abcd", "onComplete: Reading From the database");
-//                    DocumentSnapshot document = task.getResult();
-//                    List<String> schedule = (List<String>) document.get("schedule");
-//                    Log.d("list", "onComplete: Schedule List "+ schedule);
-//                    Log.d(TAG, "getSchedule: Schedule List Size: " + schedule.size());
-//
-//                    for( int i=0; i < schedule.size(); i++) {
-//                        Log.d(TAG, "getSchedule: In the for Loop");
-//                        mSchedule.add(schedule.get(i));
-//                    }
-//
-//                    Log.d(TAG, "getSchedule: Size of new String: "+ mSchedule.size());
-//                });
-//        Log.d(TAG, "getSchedule: Size of new String2: "+ mSchedule.size());
-//
-//    }
-//}
