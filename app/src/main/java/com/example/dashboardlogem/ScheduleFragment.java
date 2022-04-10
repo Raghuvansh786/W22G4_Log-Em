@@ -59,7 +59,7 @@ public class ScheduleFragment extends Fragment {
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
-        btnLogOut = view.findViewById(R.id.btnLogOut);
+//        btnLogOut = view.findViewById(R.id.btnLogOut);
         compactCalendar = view.findViewById(R.id.compactCalendarSchedule);
         txtViewMonth = view.findViewById(R.id.txtViewMonth);
         imgViewBack = view.findViewById(R.id.imgViewPrev);

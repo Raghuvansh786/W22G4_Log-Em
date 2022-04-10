@@ -40,8 +40,6 @@ public class AdminDashboard extends AppCompatActivity {
                 switch(item.getItemId()){
                     case R.id.home : temp = new AdminHomeFragment();
                         break;
-                    case R.id.timeOffRequests: temp = new AdminTimeOffFragment();
-                        break;
                     case R.id.announcements: temp = new AdminAnnouncementFragment();
                         break;
                     case R.id.fullMenu: temp = new AdminFullMenuFragment();

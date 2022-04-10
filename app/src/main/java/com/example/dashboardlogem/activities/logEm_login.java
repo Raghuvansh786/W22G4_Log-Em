@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.dashboardlogem.MainActivity;
 import com.example.dashboardlogem.R;
 
+import com.example.dashboardlogem.admin.AdminDashboard;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -115,7 +116,7 @@ public class logEm_login extends AppCompatActivity {
 
                 if (documentSnapshot.getString("isAdmin") != null) {
                     // Redirect to the admin activity
-                    startActivity(new Intent(logEm_login.this, MainActivity.class));
+                    startActivity(new Intent(logEm_login.this, AdminDashboard.class));
                 }
 
                 if (documentSnapshot.getString("isUser") != null) {

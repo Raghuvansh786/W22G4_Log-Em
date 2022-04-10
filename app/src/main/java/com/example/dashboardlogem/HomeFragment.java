@@ -1,5 +1,6 @@
 package com.example.dashboardlogem;
 
+import android.icu.util.LocaleData;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -28,11 +29,14 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -75,9 +79,6 @@ public class HomeFragment extends Fragment {
 //        txtViewShiftTime = view.findViewById(R.id.txtViewShiftTime);
         viewSchedule = view.findViewById(R.id.btnViewSchedule);
 
-        Employee emp = new Employee("12321","Amit Bhattacharya","Hey","3:00pm","5:00pm");
-        Employee emp2 = new Employee("12321","Raghuvansh Raj","Hey","3:00pm","5:00pm");
-        Employee emp3 = new Employee("12321","Jeff Rodricks","Hey","3:00pm","5:00pm");
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -118,6 +119,13 @@ public class HomeFragment extends Fragment {
         });
 
         btnClockIn.setOnClickListener((View view)-> {
+
+            try{
+
+                DateTimeFormatter d = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            String localD = LocalDate.now().format(d);
+            Log.d("dateRightNow","Local time : "+localD);
+            if(checkClockIn(scheduleList, localD)){
             LocalTime localTime = LocalTime.now();
             DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("hh:mm:ss");
             clockInTime= String.valueOf(localTime.truncatedTo(ChronoUnit.MINUTES));
@@ -125,19 +133,56 @@ public class HomeFragment extends Fragment {
             Toast.makeText(view.getContext(), "You clocked in at : "+clockInTime, Toast.LENGTH_SHORT).show();
             btnClockIn.setEnabled(false);
             btnClockOut.setEnabled(true);
+            }else {
+                Log.d("dateRightNow","Local time : "+localD);
+                Toast.makeText(view.getContext(), "You dont have any assigned shifts on : "+localD, Toast.LENGTH_SHORT).show();
+            }
+            }catch(Exception e){
+                Log.d("ghef",e.getMessage());
+            }
+
 
         });
         btnClockOut.setOnClickListener((View view)-> {
-            LocalTime localTime = LocalTime.now();
-            DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("hh:mm:ss");
-            clockOutTime= String.valueOf(localTime.truncatedTo(ChronoUnit.MINUTES));
+
+
+                DocumentReference dd = fStore.collection("Users").document(userID);
+                Map<String, Object> userInfo = new HashMap<>();
+                Map<String, String> punchInfo = new HashMap<>();
+                LocalTime localTime = LocalTime.now();
+                DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("hh:mm:ss");
+                clockOutTime= String.valueOf(localTime.truncatedTo(ChronoUnit.MINUTES));
+
+//                Log.d("conn"                        )
+
+                punchInfo.put("clockInTime", clockInTime);
+                punchInfo.put("clockOutTime",clockOutTime);
+
+                userInfo.put("time", punchInfo);
+
+                dd.update(userInfo);
+
 //            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameContainer, new ClockIn()).commit();
-            Toast.makeText(view.getContext(), "You clocked out at : "+clockOutTime, Toast.LENGTH_SHORT).show();
-            btnClockOut.setEnabled(false);
-            btnClockIn.setEnabled(true);
+                Toast.makeText(view.getContext(), "You clocked out at : "+clockOutTime, Toast.LENGTH_SHORT).show();
+//                Log.d("dateRightNow","Local time : "+localD);
+
+                btnClockOut.setEnabled(false);
+                btnClockIn.setEnabled(true);
+
+
+
+
 
         });
         return view;
+    }
+
+    boolean checkClockIn(List<String> schedule, String localDate){
+
+        if(schedule.contains(localDate)){
+            return true;
+        }
+        return false;
     }
 
 }
