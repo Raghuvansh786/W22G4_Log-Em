@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material_dynamic_neutral70">
+    android:background="@color/white">
 <!--    android:backgroundTintMode="src_in"-->
 <!--    tools:context=".LogInActivity">-->
 
@@ -15,7 +15,7 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:text="Login"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +33,7 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:text="Please Sign In to continue"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,8 +56,8 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:singleLine="false"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/material_dynamic_neutral70"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.378"
@@ -80,8 +80,8 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:singleLine="false"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/material_dynamic_neutral70"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.378"
@@ -93,18 +93,19 @@
         android:id="@+id/btnLogIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
         android:fontFamily="serif"
         android:text="Login"
+        android:background="@color/material_dynamic_neutral70"
         android:textColor="@color/white"
         android:textSize="24sp"
-        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.758"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTxtPassword"
         app:layout_constraintVertical_bias="0.237" />
+<!--        android:background="?android:attr/selectableItemBackground"-->
+<!--        android:textStyle="bold"-->
 
     <TextView
         android:id="@+id/txtViewLogIn"
@@ -112,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="18dp"
         android:text="Create account"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="normal|italic"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -134,7 +135,8 @@
         android:paddingBottom="0dp"
         android:text="Sign Up"
         android:textAllCaps="false"
-        android:textColor="@color/white"
+
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="normal|italic"
         app:layout_constraintBottom_toBottomOf="parent"

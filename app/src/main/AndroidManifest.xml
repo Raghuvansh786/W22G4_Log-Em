@@ -4,25 +4,30 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_logem"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon_logem"
         android:supportsRtl="true"
         android:theme="@style/Theme.DashboardLogEm">
         <activity
-            android:name=".admin.AddEmpSchedule"
-            android:exported="false" />
-        <activity
-            android:name=".admin.AdminDashboard"
-            android:exported="true"></activity>
-        <activity
-            android:name=".activities.logEm_login"
+            android:name=".activities.LogemSplash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".admin.AddEmpSchedule"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminDashboard"
+            android:exported="true" />
+        <activity
+            android:name=".activities.logEm_login"
+            android:exported="true">
+
         </activity>
         <activity
             android:name=".MainActivity"

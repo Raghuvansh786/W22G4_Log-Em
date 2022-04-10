@@ -95,10 +95,12 @@ public class HomeFragment extends Fragment {
                     Log.d("abcd", "onComplete: Reading From the database");
                     DocumentSnapshot document = task.getResult();
                     scheduleList = (ArrayList<String>) document.get("schedule");
-
+                    if(scheduleList!=null){
 
                     ArrayAdapter scheduleAdapter = new ArrayAdapter(view.getContext(), android.R.layout.simple_list_item_1,scheduleList);
                     listView.setAdapter(scheduleAdapter);
+                    }
+
 
                     txtViewName.setText(document.get("fullName").toString());
                     txtViewEmpNum.setText(userID);});
@@ -179,8 +181,13 @@ public class HomeFragment extends Fragment {
 
     boolean checkClockIn(List<String> schedule, String localDate){
 
+        if(schedule != null){
         if(schedule.contains(localDate)){
             return true;
+        }
+
+        }else {
+            Toast.makeText(view.getContext(), "You are not assigned for any shifts today", Toast.LENGTH_SHORT).show();
         }
         return false;
     }
