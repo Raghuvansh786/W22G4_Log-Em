@@ -11,23 +11,27 @@
         android:id="@+id/txtViewClockIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:text="Clock In"
-        android:textSize="34sp"
+        android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTxtDate"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="Date"
         android:inputType="date"
         android:minHeight="48dp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,11 +56,11 @@
         android:id="@+id/btnCancelPunch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="28dp"
         android:text="Cancel"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.271"
+        android:textColor="@color/white"
+        android:textSize="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewTime" />
 
@@ -65,11 +69,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:layout_marginEnd="24dp"
         android:text="Confirm"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:textSize="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.776"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewTime" />
+
+    <View
+        android:id="@+id/divider7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/editTxtDate"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewClockIn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

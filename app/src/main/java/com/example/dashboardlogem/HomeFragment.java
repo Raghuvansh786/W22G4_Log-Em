@@ -1,8 +1,10 @@
 package com.example.dashboardlogem;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -17,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dashboardlogem.interfaces.EmployeeDao;
 import com.google.android.gms.tasks.Task;
@@ -25,6 +28,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -37,6 +43,7 @@ public class HomeFragment extends Fragment {
     TextView txtViewEmpNum;
     TextView txtViewShiftTime;
     Button btnClockIn;
+    Button btnClockOut;
     Button viewSchedule;
     ListView listView;
     ArrayList<String> scheduleList = new ArrayList<>();
@@ -44,7 +51,10 @@ public class HomeFragment extends Fragment {
     FirebaseFirestore fStore;
     View view;
     HomeViewModel homeVM;
+    String clockInTime;
+    String clockOutTime;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,6 +66,8 @@ public class HomeFragment extends Fragment {
         listView = view.findViewById(R.id.listViewSchedule);
 
         btnClockIn = view.findViewById(R.id.btnClockIn);
+        btnClockOut = view.findViewById(R.id.btnClockOut);
+        btnClockOut.setEnabled(false);
         homeVM = new ViewModelProvider(this).get(HomeViewModel.class);
 //        homeVM.setData();
         txtViewName = view.findViewById(R.id.txtViewName);
@@ -106,10 +118,23 @@ public class HomeFragment extends Fragment {
         });
 
         btnClockIn.setOnClickListener((View view)-> {
+            LocalTime localTime = LocalTime.now();
+            DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("hh:mm:ss");
+            clockInTime= String.valueOf(localTime.truncatedTo(ChronoUnit.MINUTES));
+//            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameContainer, new ClockIn()).commit();
+            Toast.makeText(view.getContext(), "You clocked in at : "+clockInTime, Toast.LENGTH_SHORT).show();
+            btnClockIn.setEnabled(false);
+            btnClockOut.setEnabled(true);
 
-//            clockinTime= LocalTime;
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameContainer, new ClockIn()).commit();
-
+        });
+        btnClockOut.setOnClickListener((View view)-> {
+            LocalTime localTime = LocalTime.now();
+            DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("hh:mm:ss");
+            clockOutTime= String.valueOf(localTime.truncatedTo(ChronoUnit.MINUTES));
+//            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameContainer, new ClockIn()).commit();
+            Toast.makeText(view.getContext(), "You clocked out at : "+clockOutTime, Toast.LENGTH_SHORT).show();
+            btnClockOut.setEnabled(false);
+            btnClockIn.setEnabled(true);
 
         });
         return view;
