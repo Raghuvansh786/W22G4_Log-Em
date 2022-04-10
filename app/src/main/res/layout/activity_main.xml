@@ -63,4 +63,18 @@
         app:layout_constraintStart_toEndOf="@+id/txtViewHoursTitle"
         app:layout_constraintTop_toBottomOf="@+id/txtViewTitle"
         app:layout_constraintVertical_bias="0.65" />
+
+    <TextView
+        android:id="@+id/txtViewTotalTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtTotal"
+        app:layout_constraintBottom_toTopOf="@+id/txtViewTotal"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>
