@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
     Button btnClockOut;
     Button viewSchedule;
     Button btnLogOut;
-
+    Button btnUpdateAvailability;
     ListView listView;
     Button viewTimeOff;
     ArrayList<String> scheduleList = new ArrayList<>();
@@ -76,6 +76,7 @@ public class HomeFragment extends Fragment {
         viewTimeOff = view.findViewById(R.id.btnReqTo);
         btnClockIn = view.findViewById(R.id.btnClockIn);
         btnClockOut = view.findViewById(R.id.btnClockOut);
+        btnUpdateAvailability = view.findViewById(R.id.btnUpdateAvailability);
         btnLogOut = view.findViewById(R.id.btnLogOutEmp);
         btnClockOut.setEnabled(false);
         homeVM = new ViewModelProvider(this).get(HomeViewModel.class);
@@ -128,6 +129,12 @@ public class HomeFragment extends Fragment {
 
 //        String clockinTime = LocalTime;
 
+        btnUpdateAvailability.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),updateAvailability.class));
+            }
+        });
         viewSchedule.setOnClickListener((View view) ->{
 
 

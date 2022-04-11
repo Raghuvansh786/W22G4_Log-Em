@@ -38,6 +38,10 @@
         <activity
             android:name=".timeOff"
             android:exported="false" />
+        <activity
+            android:name=".updateAvailability"
+            android:exported="false" />
+
     </application>
 
 </manifest>

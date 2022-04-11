@@ -118,7 +118,10 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
-        app:layout_constraintVertical_bias="0.501" />
+        app:layout_constraintVertical_bias="1.0">
+
+
+    </ListView>
 
     <Button
         android:id="@+id/btnViewSchedule"
@@ -138,8 +141,21 @@
         android:text="CLOCK OUT"
         android:textSize="8sp"
         app:layout_constraintEnd_toStartOf="@+id/btnReqTo"
+        app:layout_constraintHorizontal_bias="0.594"
         app:layout_constraintStart_toEndOf="@+id/btnClockIn"
         app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+    <Button
+        android:id="@+id/btnUpdateAvailability"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="Availability"
+
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnLogOutEmp"
+        app:layout_constraintStart_toEndOf="@+id/btnViewSchedule"
+        app:layout_constraintTop_toBottomOf="@+id/listViewSchedule" />
 
     <Button
         android:id="@+id/btnLogOutEmp"

@@ -66,11 +66,11 @@ public class NotificationsFragment extends Fragment {
                                     nameOfSender = document.getData().get("fullName").toString();
                                         Log.d("mSS",""+message);
                                     messages.add(message);
-                                    if(messages.size() == 0){
-                                        Toast.makeText(view.getContext(),"You dont have any messages",Toast.LENGTH_SHORT).show();
-                                        String mess="You dont have any messages yet";
-                                        messages.add(mess);
-                                    }
+//                                    if(messages.size() == 0){
+//                                        Toast.makeText(view.getContext(),"You dont have any messages",Toast.LENGTH_SHORT).show();
+//                                        String mess="You dont have any messages yet";
+//                                        messages.add(mess);
+//                                    }
                                     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(view.getContext(),android.R.layout.simple_list_item_1, messages);
                                     listViewMessages.setAdapter(arrayAdapter);
                                     Log.d(TAG, document.getId() + " => " + document.getData().get("fullName"));

@@ -42,7 +42,7 @@ public class AdminAnnouncementFragment extends Fragment {
     EditText editTxtTitle, editTxtMessage;
     Button btnCancelMessage, btnSendMessage;
     String userName, userID, subject, message;
-    ListView lstViewMessages;
+    ListView lstViewMessage;
     List<String> empIds = new ArrayList<>();
     List<String> empNames = new ArrayList<>();
     List<String> msgTitle = new ArrayList<>();
@@ -62,40 +62,14 @@ public class AdminAnnouncementFragment extends Fragment {
 
         btnCancelMessage = view.findViewById(R.id.btnCancelMessage);
         btnSendMessage = view.findViewById(R.id.btnSendMessage);
-        lstViewMessages = view.findViewById(R.id.lstViewMessages);
+//        lstViewMessages = view.findViewById(R.id.lstViewMessages);
 
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         String userID = fAuth.getCurrentUser().getUid();
-
+        getMessages();
         getCurrentUserData(userID);
-        fStore.collection("Messages").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        empIds.add(document.getId());
-                        empNames.add(document.getData().get("fullName").toString());
-                        msgTitle.add(document.getData().get("Title").toString());
-                        msgDesc.add(document.getData().get("Message").toString());
-                        Log.d(TAG, document.getId() + " => " + document.getData().get("fullName"));
-                        Log.d(TAG, "onComplete: The size of list is " + msgTitle.size());
-                    }
-                } else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-                }
-                EmployeeAdapter messages = new EmployeeAdapter(empNames, msgTitle);
-                lstViewMessages.setAdapter(messages);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "onFailure: Error Occurred: " + e.getMessage());
-            }
-        });
-
-
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,10 +122,42 @@ public class AdminAnnouncementFragment extends Fragment {
 
                     Log.d("abcd", "onComplete: Reading From the database");
                     DocumentSnapshot document = task.getResult();
-                    List<String> schedule = (List<String>) document.get("schedule");
                     eName = document.get("fullName").toString();
                     eEmail = document.get("email").toString();
 
                 });
+    }
+
+
+    public void getMessages() {
+        fStore.collection("Messages").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        empIds.add(document.getId());
+                        empNames.add(document.getData().get("fullName").toString());
+                        msgTitle.add(document.getData().get("Title").toString());
+                        msgDesc.add(document.getData().get("Message").toString());
+                        Log.d(TAG, document.getId() + " => " + document.getData().get("fullName"));
+                        Log.d(TAG, "onComplete: The size of list is " + msgTitle.size());
+                    }
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+
+                EmployeeAdapter messages = new EmployeeAdapter(empNames, msgTitle);
+//        Log.d(TAG, "onCreateView: The count of the Adapter is:");
+                lstViewMessage = view.findViewById(R.id.lstViewMessages);
+                lstViewMessage.setAdapter(messages);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "onFailure: Error Occurred: " + e.getMessage());
+            }
+
+        });
     }
 }
