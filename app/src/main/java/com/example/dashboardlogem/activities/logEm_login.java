@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.dashboardlogem.MainActivity;
 import com.example.dashboardlogem.R;
 
+import com.example.dashboardlogem.SignUpActivity;
 import com.example.dashboardlogem.admin.AdminDashboard;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -100,11 +101,11 @@ public class logEm_login extends AppCompatActivity {
                 });
 
 
-//        btnMockSignUp.setOnClickListener(
-//                (View view) -> {
-//                    fAuth.signOut();
-//                    startActivity(new Intent(this, SignUpActivity.class));
-//                });
+      btnMockSignUp.setOnClickListener(
+                (View view) -> {
+                    fAuth.signOut();
+                    startActivity(new Intent(this, SignUpActivity.class));
+                });
     }
 
     private void checkUserAccess(String uid) {

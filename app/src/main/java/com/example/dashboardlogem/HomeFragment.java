@@ -1,5 +1,6 @@
 package com.example.dashboardlogem;
 
+import android.content.Intent;
 import android.icu.util.LocaleData;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dashboardlogem.activities.logEm_login;
 import com.example.dashboardlogem.interfaces.EmployeeDao;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,7 +51,10 @@ public class HomeFragment extends Fragment {
     Button btnClockIn;
     Button btnClockOut;
     Button viewSchedule;
+    Button btnLogOut;
+
     ListView listView;
+    Button viewTimeOff;
     ArrayList<String> scheduleList = new ArrayList<>();
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
@@ -68,9 +73,10 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
         listView = view.findViewById(R.id.listViewSchedule);
-
+        viewTimeOff = view.findViewById(R.id.btnReqTo);
         btnClockIn = view.findViewById(R.id.btnClockIn);
         btnClockOut = view.findViewById(R.id.btnClockOut);
+        btnLogOut = view.findViewById(R.id.btnLogOutEmp);
         btnClockOut.setEnabled(false);
         homeVM = new ViewModelProvider(this).get(HomeViewModel.class);
 //        homeVM.setData();
@@ -107,6 +113,15 @@ public class HomeFragment extends Fragment {
 
 
 
+        viewTimeOff.setOnClickListener((View view) ->{
+
+            startActivity(new Intent(view.getContext(),timeOff.class));
+        });
+
+        btnLogOut.setOnClickListener((View view) ->{
+
+            startActivity(new Intent(view.getContext(), logEm_login.class));
+        });
 
 //        txtViewEmpNum.setText(homeVM.getEmployeeNumber());
 //        txtViewShiftTime.setText(homeVM.getShiftTime());
