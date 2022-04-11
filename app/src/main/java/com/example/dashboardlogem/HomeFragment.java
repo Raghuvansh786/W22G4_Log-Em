@@ -110,7 +110,7 @@ public class HomeFragment extends Fragment {
 
 
                     txtViewName.setText(document.get("fullName").toString());
-                    txtViewEmpNum.setText(userID);});
+                    txtViewEmpNum.setText(document.get("email").toString());});
 
 
 

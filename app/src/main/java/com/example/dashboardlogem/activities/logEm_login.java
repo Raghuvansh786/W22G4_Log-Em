@@ -77,7 +77,7 @@ public class logEm_login extends AppCompatActivity {
 //                                                startActivity(new Intent(LogInActivity.this,LandingPage.class));
                                                     Toast.makeText(logEm_login.this, "Logged In Successfully..", Toast.LENGTH_SHORT).show();
                                                     finish();
-                                                    startActivity(new Intent(logEm_login.this,MainActivity.class));
+//                                                    startActivity(new Intent(logEm_login.this,MainActivity.class));
 
                                                 } else {
                                                     Log.d("Error", task.getException().getMessage());
