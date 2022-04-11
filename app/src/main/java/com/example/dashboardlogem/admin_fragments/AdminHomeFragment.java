@@ -217,7 +217,7 @@ public class AdminHomeFragment extends Fragment {
         });
     }
 
-    public void getAvailableDates() {$
+    public void getAvailableDates() {
         fStore.collection("Availability")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
