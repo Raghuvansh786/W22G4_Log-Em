@@ -1,5 +1,6 @@
 package com.example.dashboardlogem.activities;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class EmployeeAdapter extends BaseAdapter {
 
         txtViewEmail = view.findViewById(R.id.txtViewEmail);
         txtViewName = view.findViewById(R.id.txtViewEmpName);
+        Log.d(TAG, "getView: The name of the employee is:" + empName.get(i));
 
         txtViewName.setText(empName.get(i));
         txtViewEmail.setText(empEmail.get(i));

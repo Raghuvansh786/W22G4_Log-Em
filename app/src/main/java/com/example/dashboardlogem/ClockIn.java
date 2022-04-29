@@ -1,6 +1,5 @@
 package com.example.dashboardlogem;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,12 +33,12 @@ public class ClockIn extends Fragment {
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     View view;
-    String time, Date, enteredDate,userId,Title,dbKey;
+    String time, Date, enteredDate, userId, Title, dbKey;
     List<String> ScheduledDates;
     Boolean empty;
     private static final String TAG = "ClockInFragment";
 
-    public ClockIn(String time, String date, List<String> scheduledDates,String UserID,String title,String DbKey) {
+    public ClockIn(String time, String date, List<String> scheduledDates, String UserID, String title, String DbKey) {
         this.time = time;
         Date = date;
         ScheduledDates = scheduledDates;
@@ -47,9 +46,11 @@ public class ClockIn extends Fragment {
         Title = title;
         dbKey = DbKey;
     }
-    public ClockIn(){
+
+    public ClockIn() {
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,10 +69,10 @@ public class ClockIn extends Fragment {
                 enteredDate = editTxtDate.getText().toString();
                 if (Date.equalsIgnoreCase(enteredDate)) {
                     Log.d(TAG, "onClick: Date Checked Successfully...");
-                    checkMatchingDates(ScheduledDates,enteredDate,time,dbKey);
+                    checkMatchingDates(ScheduledDates, enteredDate, time, dbKey);
 
                 } else {
-                    Log.d(TAG, "onClick:Entered Date is: "+ enteredDate);
+                    Log.d(TAG, "onClick:Entered Date is: " + enteredDate);
                     Toast.makeText(getActivity(), "Incorrect Date:You can only Clock In for today.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -89,24 +90,24 @@ public class ClockIn extends Fragment {
         return view;
     }
 
-    public void checkMatchingDates(List<String> dates,String eDate,String time,String dbKEY) {
+    public void checkMatchingDates(List<String> dates, String eDate, String time, String dbKEY) {
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
 
         DocumentReference df = fStore.collection("Users").document(userId);
         Map<String, Object> userInfo = new HashMap<>();
-        Map<String,String> punchInfo = new HashMap<>();
+        Map<String, String> punchInfo = new HashMap<>();
 
         Log.d(TAG, "checkMatchingDates: In the Method");
-        for (int i= 0;i< dates.size();i++) {
+        for (int i = 0; i < dates.size(); i++) {
             Log.d(TAG, "checkMatchingDates: In the Method");
-            if(dates.get(i).equalsIgnoreCase(eDate)) {
+            if (dates.get(i).equalsIgnoreCase(eDate)) {
                 getTimeField(df);
-                punchInfo.put("Date",eDate);
-                punchInfo.put(dbKEY,time);
+                punchInfo.put("Date", eDate);
+                punchInfo.put(dbKEY, time);
 
-                userInfo.put("time",punchInfo);
+                userInfo.put("time", punchInfo);
                 df.update(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -115,7 +116,7 @@ public class ClockIn extends Fragment {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d(TAG, "onFailure: Error while adding data"+ e.getMessage());
+                        Log.d(TAG, "onFailure: Error while adding data" + e.getMessage());
                     }
                 });
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameContainer, new HomeFragment()).commit();
@@ -123,21 +124,21 @@ public class ClockIn extends Fragment {
                 Toast.makeText(getActivity(), "Punch Created.", Toast.LENGTH_SHORT).show();
                 return;
             } else {
-                Log.d(TAG, "checkMatchingDates: The date entered is: "+ eDate );
+                Log.d(TAG, "checkMatchingDates: The date entered is: " + eDate);
                 Toast.makeText(getActivity(), "You are not Scheduled for Today.", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
     }
 
-    public void getTimeField( DocumentReference df) {
+    public void getTimeField(DocumentReference df) {
         df.get().addOnCompleteListener(
                 (@NonNull Task<DocumentSnapshot> task) -> {
                     DocumentSnapshot document = task.getResult();
-                    if(document.get("time")!=null) {
-                        Log.d(TAG, "getTimeField: The data present is: "+ document.getData().get("date"));
+                    if (document.get("time") != null) {
+                        Log.d(TAG, "getTimeField: The data present is: " + document.getData().get("date"));
 //                        scheduledDates = (List<String>) document.get("schedule");
-                    }else {
+                    } else {
                         Log.d(TAG, "getTimeField: The field is null");
                     }
 //

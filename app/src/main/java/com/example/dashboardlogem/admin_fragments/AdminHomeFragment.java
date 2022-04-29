@@ -2,10 +2,6 @@ package com.example.dashboardlogem.admin_fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +11,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import com.example.dashboardlogem.R;
 import com.example.dashboardlogem.activities.EmployeeAdapter;
-import com.example.dashboardlogem.activities.logEm_login;
 import com.example.dashboardlogem.admin.AddEmpSchedule;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,7 +28,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -48,8 +45,10 @@ public class AdminHomeFragment extends Fragment {
     List<String> empEmail = new ArrayList<>();
     List<String> empIds = new ArrayList<>();
     List<String> requestedDates = new ArrayList<>();
+    List<String> requestedEmps = new ArrayList<>();
     String eName, eEmail;
     List<String> availableDates = new ArrayList<>();
+    List<String> availableEmp = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -101,7 +100,7 @@ public class AdminHomeFragment extends Fragment {
         btnAvailableRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EmployeeAdapter employeeAdapter = new EmployeeAdapter(empNames,availableDates);
+                EmployeeAdapter employeeAdapter = new EmployeeAdapter(availableEmp,availableDates);
                 employeeAdapter.notifyDataSetChanged();
                 lstViewEmployee.setAdapter(employeeAdapter);
                 Log.d(TAG, "onClick: All employee count"+lstViewEmployee.getCount());
@@ -124,7 +123,7 @@ public class AdminHomeFragment extends Fragment {
             public void onClick(View view) {
 //                getData();
                 EmployeeAdapter employeeAdapter = new EmployeeAdapter(empNames, empEmail);
-                employeeAdapter.notifyDataSetChanged();
+//                employeeAdapter.notifyDataSetChanged();
                 lstViewEmployee.setAdapter(employeeAdapter);
 
 
@@ -155,8 +154,9 @@ public class AdminHomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                EmployeeAdapter timeOffRequest = new EmployeeAdapter(empNames,requestedDates);
-                timeOffRequest.notifyDataSetChanged();
+                EmployeeAdapter timeOffRequest = new EmployeeAdapter(requestedEmps,requestedDates);
+//                timeOffRequest.notifyDataSetChanged();
+                Log.d(TAG, "onClick: Size of requested dated is: "+ requestedDates.size());
                 lstViewEmployee.setAdapter(timeOffRequest);
 
             }
@@ -203,6 +203,7 @@ public class AdminHomeFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 requestedDates.add(document.getData().get("date").toString());
+                                requestedEmps.add(document.getData().get("fullName").toString());
                             }
                             Log.d(TAG, "requested date list size"+ requestedDates.size());
                         } else {
@@ -226,6 +227,7 @@ public class AdminHomeFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 availableDates.add(document.getData().get("date").toString());
+                                availableEmp.add(document.getData().get("fullName").toString());
                             }
                             Log.d(TAG, "requested date list size"+ availableDates.size());
                         } else {
